@@ -1,0 +1,15 @@
+LWT-db:
+  image: mariadb
+  restart: always
+  environment:
+  - MYSQL_ROOT_PASSWORD=root
+
+LWT:
+  image: richarvey/nginx-php-fpm:latest
+  links:
+  - LWT-db:LWT-db
+  ports:
+  - 8080:80
+  environment:
+  - GIT_REPO=https://github.com/kylegoetz/lwt
+  restart: always
